@@ -8,7 +8,7 @@
  * @format : ....
  * Return : ...
  */
-void _printf(const char *format, ...)
+int _printf(const char *format, ...)
 {
 	fm_t forma_type[] = {
 		{ "c", print_char },
@@ -35,6 +35,7 @@ void _printf(const char *format, ...)
 			else
 			{
 				_putchar('l');
+				sum++;
 			}
 			j++;
 		}
@@ -42,6 +43,7 @@ void _printf(const char *format, ...)
 	}
 	va_end(ap);
 	_putchar ('\n');
+	return (sum);
 }
 
 /**
