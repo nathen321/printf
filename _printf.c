@@ -29,16 +29,13 @@ int _printf(const char *format, ...)
 				if (format[i + 1] == *forma_type[j].id)
 				{
 					sum += forma_type[j].f(ap);
-					i++;
+					i += 2;
 				}
-			}
-			else
-			{
-				_putchar('l');
-				sum++;
 			}
 			j++;
 		}
+		_putchar(format[i]);
+		sum++;
 		i++;
 	}
 	va_end(ap);
