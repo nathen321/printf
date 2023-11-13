@@ -17,29 +17,35 @@ int _printf(const char *format, ...)
 	unsigned int sum = 0, i = 0, j = 0;
 	va_list ap;
 
+	if (format == NULL)
+		return (-1);
+
 	va_start(ap, format);
 
 	while (format != NULL && format[i])
 	{
 		j = 0;
-		while (j < 2)
+		if (format[i] == '%')
 		{
-			if (format[i] == '%')
-			{
-				if (format[i + 1] == *forma_type[j].id)
+				while (j < 2)
 				{
-					sum += forma_type[j].f(ap);
-					i += 2;
+					if (format[i + 1] == *forma_type[j].id)
+					{
+						sum += forma_type[j].f(ap);
+						i += 2;
+					}
+					j++;
 				}
-			}
-			j++;
+		}
+		else if (format[i + 1] == '%')
+		{
+			i++;
 		}
 		_putchar(format[i]);
 		sum++;
 		i++;
 	}
 	va_end(ap);
-	_putchar ('\n');
 	return (sum);
 }
 
