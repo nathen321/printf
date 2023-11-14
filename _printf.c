@@ -10,11 +10,7 @@
  */
 int _printf(const char *format, ...)
 {
-	fm_t forma_type[] = {
-		{ "c", print_char },
-		{ "s", print_string }
-	};
-	unsigned int sum = 0, i = 0, j = 0;
+	unsigned int sum = 0, i = 0;
 	va_list ap;
 
 	if (format == NULL)
@@ -24,26 +20,12 @@ int _printf(const char *format, ...)
 
 	while (format != NULL && format[i])
 	{
-		j = 0;
+		if (format[i] == '\0')
+			return (-1);
 		if (format[i] == '%')
 		{
 			i++;
-				while (j < 2)
-				{
-					if (format[i] == *forma_type[j].id)
-					{
-						sum += forma_type[j].f(ap);
-						i++;
-					}
-					if (format[i] == '\0')
-						return (-1);
-					if (format[i] == '%')
-					{
-						_putchar(format[i]);
-						i++;
-					}
-					j++;
-				}
+			cheker(format[i + 1], ap);
 		}
 		_putchar(format[i]);
 		sum++;
@@ -54,32 +36,31 @@ int _printf(const char *format, ...)
 }
 
 /**
- * print_char - print a formated output?
+ * cheker - print a formated output?
+ * @sep : ....
  * @ap : ....
- * Return: ......
+ * Return: ........
  */
-int print_char(va_list ap)
+int cheker(char sep, va_list ap)
 {
-	_putchar(va_arg(ap, int));
-	return (1);
-}
+	fm_t forma_type[] = {
+		{ "c", print_char },
+		{ "s", print_string }
+	};
+	unsigned int sum = 0, j = 0;
 
-/**
- * print_string - print a formated output?
- * @ap : ....
- * Return: ....
- */
-int print_string(va_list ap)
-{
-	unsigned int sum = 0, i = 0;
-	char *str;
-
-	str = va_arg(ap, char *);
-	while (str[i] != '\0')
+	while (j < 2)
 	{
-		_putchar(str[i]);
-		i++;
-		sum++;
+		if (sep == *forma_type[j].id)
+		{
+			sum += forma_type[j].f(ap);
+		}
+		if (sep == '%')
+		{
+			_putchar('%');
+			sum++;
+		}
+		j++;
 	}
 	return (sum);
 }
