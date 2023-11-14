@@ -32,7 +32,7 @@ int _printf(const char *format, ...)
 			if (existe(format[i]) == 1)
 			{
 				sum += cheker(format[i], ap);
-			} 
+			}
 			else
 			{
 				sum += unknown(format[i]);
