@@ -6,7 +6,7 @@
 /**
  * _printf - print a formated output?
  * @format : ....
- * Return : ...
+ * Return: ........
  */
 int _printf(const char *format, ...)
 {
@@ -27,19 +27,23 @@ int _printf(const char *format, ...)
 		j = 0;
 		if (format[i] == '%')
 		{
+			i++;
 				while (j < 2)
 				{
-					if (format[i + 1] == *forma_type[j].id)
+					if (format[i] == *forma_type[j].id)
 					{
 						sum += forma_type[j].f(ap);
-						i += 2;
+						i++;
+					}
+					if (format[i] == '\0')
+						return (-1);
+					if (format[i] == '%')
+					{
+						_putchar(format[i]);
+						i++;
 					}
 					j++;
 				}
-		}
-		else if (format[i + 1] == '%')
-		{
-			i++;
 		}
 		_putchar(format[i]);
 		sum++;
