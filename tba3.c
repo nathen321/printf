@@ -25,13 +25,26 @@ int print_string(va_list ap)
 	char *str;
 
 	str = va_arg(ap, char *);
-	while (str[i] != '\0')
+	if (str != NULL)
 	{
-		_putchar(str[i]);
-		i++;
-		sum++;
+		while (str[i] != '\0')
+		{
+			_putchar(str[i]);
+			i++;
+			sum++;
+		}
+		return (sum);
 	}
-	return (sum);
+	else
+	{
+		_putchar('(');
+		_putchar('n');
+		_putchar('u');
+		_putchar('l');
+		_putchar('l');
+		_putchar(')');
+		return (6);
+	}
 }
 
 /**
