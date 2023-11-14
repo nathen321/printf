@@ -20,16 +20,31 @@ int _printf(const char *format, ...)
 
 	while (format != NULL && format[i])
 	{
-		if (format[i] == '\0')
-			return (-1);
 		if (format[i] == '%')
 		{
 			i++;
-			cheker(format[i + 1], ap);
+			if (format[i] == '\0')
+				return (-1);
+			while (format[i] == ' ')
+				i++;
+			if (format[i] == '%')
+				sum += _putchar(format[i]);
+			if (existe(format[i]) == 1)
+			{
+				sum += cheker(format[i], ap);
+			} 
+			else
+			{
+				sum += unknown(format[i]);
+			}
+			i++;
 		}
-		_putchar(format[i]);
-		sum++;
-		i++;
+		else
+		{
+			_putchar(format[i]);
+			sum++;
+			i++;
+		}
 	}
 	va_end(ap);
 	return (sum);
@@ -45,7 +60,8 @@ int cheker(char sep, va_list ap)
 {
 	fm_t forma_type[] = {
 		{ "c", print_char },
-		{ "s", print_string }
+		{ "s", print_string },
+		{NULL, NULL}
 	};
 	unsigned int sum = 0, j = 0;
 
@@ -55,12 +71,25 @@ int cheker(char sep, va_list ap)
 		{
 			sum += forma_type[j].f(ap);
 		}
-		if (sep == '%')
-		{
-			_putchar('%');
-			sum++;
-		}
 		j++;
 	}
 	return (sum);
+}
+/**
+ * existe - print a formated output?
+ * @sep : ....
+ * Return: ........
+ */
+int existe(char sep)
+{
+	char str[] = {'c', 's', 'd', 'i', 'b', '%', 'p', 'X', 'x', 'u', '0'};
+	unsigned int i = 0;
+
+	while (i < 10)
+	{
+		if (sep == str[i])
+			return (1);
+		i++;
+	}
+	return (0);
 }

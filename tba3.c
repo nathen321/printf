@@ -33,3 +33,16 @@ int print_string(va_list ap)
 	}
 	return (sum);
 }
+
+/**
+ * unknown - print a formated output?
+ * @sep : ....
+ * Return: ....
+ */
+
+int unknown(char sep)
+{
+	_putchar('%');
+	_putchar(sep);
+	return (2);
+}
