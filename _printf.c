@@ -61,11 +61,13 @@ int cheker(char sep, va_list ap)
 	fm_t forma_type[] = {
 		{ "c", print_char },
 		{ "s", print_string },
+		{ "i", print_a_integer },
+		{ "d", print_a_integer },
 		{NULL, NULL}
 	};
 	unsigned int sum = 0, j = 0;
 
-	while (j < 2)
+	while (j < 4)
 	{
 		if (sep == *forma_type[j].id)
 		{

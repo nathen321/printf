@@ -11,6 +11,8 @@ typedef struct foramat_type
 	int (*f)(va_list args);
 } fm_t;
 
+int print_a_integer(va_list args);
+void _recursion_integer(int a);
 int cheker(char sep, va_list ap);
 int existe(char sep);
 int _printf(const char *format, ...);
